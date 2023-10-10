@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '../../interfaces/usuario.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit{
   })
 
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder,
+              private router: Router){
 
   
   }
@@ -32,6 +34,8 @@ export class LoginComponent implements OnInit{
 
       if (user.username === "xx" && user.password === 'xx'){
         console.log('Bienvenida')
+        this.router.navigate(['./cliente'])
+        
       }else{
         this.form.reset()
       }

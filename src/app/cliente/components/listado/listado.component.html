@@ -1,0 +1,33 @@
+
+  <p-table [value]="clientes" [paginator]="true" [rows]="25" >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Fecha de Creación</th>
+        <th>Avatar</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+        
+        <th>Ver</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cliente>
+      <tr>
+        <td>{{ cliente.id }}</td>
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.fechaCreacion | date }}</td>
+        <td><img [src]="cliente.avatar" alt="Avatar" width="50" height="50"></td>
+        <td>{{ cliente.direccion }}</td>
+        <td>{{ cliente.Telefono }}</td>
+        <td>{{ cliente.email }}</td>
+
+        <td>
+            <!-- Botón "Ver más" que muestra detalles -->
+            <button pButton icon="pi pi-eye" (click)="verDetalles(cliente)"></button>
+          </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  
