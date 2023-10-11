@@ -20,9 +20,18 @@ export class ListadoComponent implements OnInit {
     .subscribe(clientes => this.clientes = clientes);
   }
 
-  verDetalles(cliente: Cliente){
-    console.log('Mostrando detalles del cliente: ', cliente)
+  // verDetalles(cliente: Cliente){
+  //   console.log('Mostrando detalles del cliente: ', cliente)
+  // }
+  AgregarCliente(){
+
   }
 
+  eliminar(){
+    // this.clienteService.eliminar(this.clientes.id)
+    // .subscribe ( resp => {
+    //   console.log('eliminado')
+    // })
+  }
 
 }

@@ -9,6 +9,14 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { TableModule } from 'primeng/table';
 
+import { SidebarModule } from 'primeng/sidebar';
+
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DropdownItem, DropdownModule } from 'primeng/dropdown';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler';
+
+import { MenubarModule } from 'primeng/menubar';
+
 
 
 
@@ -28,8 +36,14 @@ import { TableModule } from 'primeng/table';
     CardModule,
     InputTextModule,
     PasswordModule,
-    TableModule
+    TableModule,
+    SidebarModule,
+    DropdownModule,
+    MenubarModule
+    
+   
 
-  ]
+  ],
+  
 })
 export class PrimeNgModule { }

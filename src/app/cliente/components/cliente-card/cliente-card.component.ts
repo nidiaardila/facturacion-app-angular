@@ -9,7 +9,7 @@ import { Cliente } from '../../interfaces/cliente.interface';
 })
 export class ClienteCardComponent {
 
-  @Input() cliente!: Cliente;
+  // @Input() cliente!: Cliente;
 
 
 }

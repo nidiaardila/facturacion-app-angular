@@ -19,11 +19,19 @@ export class ClienteComponent {
               private router: Router){}
 
 
-  // ngOnInit(): void {
-  //   this.activateRoute.params.pipe(
-  //     switchMap(({ id }) => this.clienteService.getClienteId(id) )
-  //   ).subscribe ( cliente => this.cliente = cliente);
+  ngOnInit(): void {
+    this.activateRoute.params.pipe(
+      switchMap(({ id }) => this.clienteService.getClienteId(id) )
+    ).subscribe ( cliente => this.cliente = cliente);
     
-  // }
+  }
+
+
+  editar() {
+    console.log('editado cliente')
+  }
+  
+  
+
 
 }

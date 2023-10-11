@@ -1,8 +1,7 @@
-<p>cliente works!</p>
 
-<div class="p-card">
+<div class="p-card p-fluid p-flex p-jc-center" *ngIf="cliente">
   <div class="p-card-header">
-    <img [src]="cliente.avatar" alt="Avatar">
+    <img [src]="cliente.avatar" alt="Avatar" width="50" height="50">
     <span>{{ cliente.nombre }}</span>
   </div>
   <div class="p-card-body">
@@ -14,31 +13,23 @@
       <li><strong>ID:</strong> {{ cliente.id }}</li>
     </ul>
   </div>
+  <div class="p-card-footer">
+    <div class="p-grid p-justify-content-center">
+      <button pButton class="p-button-secondary mb-1 p-button-sm" 
+              icon="pi pi-pencil" 
+              [routerLink]="['/cliente/listado']">
+              Aceptar
+      </button>
+      <button pButton icon="pi pi-arrow-left" 
+              class="p-button-sm" 
+              [routerLink]="['/cliente/listado']">
+              Cancelar
+      </button>
+    </div>
+  </div>
 </div>
 
 
-
-  <hr>
-  <hr>
-
-  <!-- <div class="p-card">
-    <div class="p-card-header">
-      <img [src]="cliente.avatar" alt="Avatar">
-      <span>{{ cliente.nombre }}</span>
-    </div>
-    <div class="p-card-body">
-      Detalles del cliente -->
-      <!-- <ul>
-        <li><strong>Fecha de Creación:</strong> {{ cliente.fechaCreacion | date }}</li>
-        <li><strong>Dirección:</strong> {{ cliente.direccion }}</li>
-        <li><strong>Teléfono:</strong> {{ cliente.telefono }}</li>
-        <li><strong>Email:</strong> {{ cliente.email }}</li>
-        <li><strong>ID:</strong> {{ cliente.id }}</li>
-      </ul>
-    </div>
-  </div>
-   -->
-
-  
-
-  
+<div *ngIf="!cliente">
+  <p>Cargando información del cliente...</p>
+</div>
