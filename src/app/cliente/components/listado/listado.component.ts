@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../interfaces/cliente.interface';
+import { Router } from '@angular/router';
+
+import { ConfirmationService } from 'primeng/api';
+
+
+
+
+
+
 
 @Component({
   selector: 'app-listado',
@@ -11,27 +20,42 @@ export class ListadoComponent implements OnInit {
 
   clientes: Cliente[]  = [];
 
-
-  constructor (private clienteService: ClienteService) {}
+  constructor (private clienteService: ClienteService,
+               private router: Router,
+               ) {}
 
 
   ngOnInit(): void {
+   this.getListadoClientes()
+  }
+
+
+  getListadoClientes(){
     this.clienteService.getClientes()
     .subscribe(clientes => this.clientes = clientes);
   }
 
-  // verDetalles(cliente: Cliente){
-  //   console.log('Mostrando detalles del cliente: ', cliente)
-  // }
+
+  delete(cliente: Cliente){
+    this.clienteService.deleteCliente(cliente.id)
+    .subscribe( resp => {
+      this.getListadoClientes()
+    })
+  }
+
+
+  
+  
+
+  
   AgregarCliente(){
 
   }
 
-  eliminar(){
-    // this.clienteService.eliminar(this.clientes.id)
-    // .subscribe ( resp => {
-    //   console.log('eliminado')
-    // })
-  }
+  
+ 
+
+
 
 }
+ 

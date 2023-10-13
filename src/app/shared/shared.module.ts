@@ -4,17 +4,20 @@ import { SidemenuComponent } from './sidemenu/sidemenu.component';
 
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
 @NgModule({
   declarations: [
     SidemenuComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
-    PrimeNgModule
+    PrimeNgModule,
+    
   ],
   exports: [
     SidemenuComponent,

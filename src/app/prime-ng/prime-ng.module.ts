@@ -11,11 +11,16 @@ import { TableModule } from 'primeng/table';
 
 import { SidebarModule } from 'primeng/sidebar';
 
+
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DropdownItem, DropdownModule } from 'primeng/dropdown';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler';
 
 import { MenubarModule } from 'primeng/menubar';
+
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 
 
@@ -39,7 +44,12 @@ import { MenubarModule } from 'primeng/menubar';
     TableModule,
     SidebarModule,
     DropdownModule,
-    MenubarModule
+    MenubarModule,
+    ProgressSpinnerModule,
+
+    ToastModule,
+    ConfirmDialogModule,
+    ButtonModule
     
    
 

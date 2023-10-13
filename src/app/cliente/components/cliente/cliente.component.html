@@ -1,35 +1,71 @@
-
-<div class="p-card p-fluid p-flex p-jc-center" *ngIf="cliente">
-  <div class="p-card-header">
-    <img [src]="cliente.avatar" alt="Avatar" width="50" height="50">
-    <span>{{ cliente.nombre }}</span>
-  </div>
-  <div class="p-card-body">
-    <ul>
-      <li><strong>Fecha de Creación:</strong> {{ cliente.fechaCreacion | date }}</li>
-      <li><strong>Dirección:</strong> {{ cliente.direccion }}</li>
-      <li><strong>Teléfono:</strong> {{ cliente.Telefono }}</li>
-      <li><strong>Email:</strong> {{ cliente.email }}</li>
-      <li><strong>ID:</strong> {{ cliente.id }}</li>
-    </ul>
-  </div>
-  <div class="p-card-footer">
-    <div class="p-grid p-justify-content-center">
-      <button pButton class="p-button-secondary mb-1 p-button-sm" 
-              icon="pi pi-pencil" 
-              [routerLink]="['/cliente/listado']">
-              Aceptar
-      </button>
-      <button pButton icon="pi pi-arrow-left" 
-              class="p-button-sm" 
-              [routerLink]="['/cliente/listado']">
-              Cancelar
-      </button>
-    </div>
-  </div>
-</div>
+<app-toolbar></app-toolbar>
+<app-sidemenu></app-sidemenu>
 
 
 <div *ngIf="!cliente">
   <p>Cargando información del cliente...</p>
+
+  <p-progressSpinner></p-progressSpinner>
 </div>
+
+
+<h3 class="cliente-titulo">  {{ ( cliente.id )? 'Editar' : 'Nuevo' }}
+  Cliente:
+  <small>{{ cliente.nombre }}</small> 
+</h3>
+
+
+<div class="p-card mi-card" *ngIf="cliente">
+
+    <form #clienteForm="ngForm" (ngSubmit)="update()">
+            <table class="form-table">
+              
+              <tr>
+                <td><label for="avatar">ID:</label></td>
+                <td><input type="text" id="id" name="id" [(ngModel)]="cliente.id" placeholder="ID" class="p-inputtext" disabled></td>
+              </tr>
+              <tr>
+                <td><label for="nombre">Nombre:</label></td>
+                <td><input type="text" id="nombre" name="nombre" [(ngModel)]="cliente.nombre" placeholder="Nombre" class="p-inputtext" required></td>
+              </tr>
+              <tr>
+                <td><label for="avatar">Fecha de creación:</label></td>
+                <td><input type="text" id="fecha" name="fecha" [(ngModel)]="cliente.fechaCreacion" placeholder="Fecha de creación" class="p-inputtext" disabled></td>
+              </tr>
+              <tr>
+                <td><label for="avatar">Dirección:</label></td>
+                <td><input type="text" id="direccion" name="direccion" [(ngModel)]="cliente.direccion" placeholder="Direccion" class="p-inputtext"></td>
+              </tr>
+              <tr>
+                <td><label for="avatar">Teléfono:</label></td>
+                <td><input type="text" id="telefono" name="telefono" [(ngModel)]="cliente.Telefono" placeholder="Teléfono" class="p-inputtext"></td>
+              </tr>
+              <tr>
+                <td><label for="avatar">Email:</label></td>
+                <td><input type="text" id="email" name="email" [(ngModel)]="cliente.email" placeholder="Email" class="p-inputtext" disabled></td>
+              </tr>
+              <tr>
+                <td><label for="avatar">Avatar:</label></td>
+        
+                <td> <img [src]="cliente.avatar" alt="Avatar" width="90" height="90"></td>
+              </tr>
+            </table> 
+
+            <div class="button-cliente">
+              <button type="button" 
+                      pButton icon="pi pi-times" 
+                      label="Cancelar" 
+                      class="p-button-secondary p-button-sm"
+                      [routerLink]="['cliente/listado']">
+              </button>
+              <button type="submit" 
+                      pButton icon="pi pi-check" 
+                      [label]="(cliente.id) ? 'Editar' : 'Crear'" 
+                      class=" p-button-sm">
+              </button>
+            </div>
+      
+    </form>
+</div>
+
+

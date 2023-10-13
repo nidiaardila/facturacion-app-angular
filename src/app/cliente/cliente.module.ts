@@ -11,25 +11,27 @@ import { ClienteCardComponent } from './components/cliente-card/cliente-card.com
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ClienteService } from './services/cliente.service';
+import { SharedModule } from "../shared/shared.module";
 
 
 @NgModule({
-  declarations: [
-    ClienteComponent,
-    ListadoComponent,
-    CrearComponent,
-    BuscarComponent,
-    ClienteCardComponent
-  ],
-  imports: [
-    CommonModule,
-    ClienteRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    PrimeNgModule
-  ],
-  providers: [
-    ClienteService
-  ]
+    declarations: [
+        ClienteComponent,
+        ListadoComponent,
+        CrearComponent,
+        BuscarComponent,
+        ClienteCardComponent
+    ],
+    providers: [
+        ClienteService
+    ],
+    imports: [
+        CommonModule,
+        ClienteRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        PrimeNgModule,
+        SharedModule
+    ]
 })
 export class ClienteModule { }

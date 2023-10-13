@@ -11,7 +11,17 @@ import { Cliente } from '../../interfaces/cliente.interface';
 })
 export class ClienteComponent {
 
-  cliente!: Cliente;
+
+  cliente: Cliente = {
+    fechaCreacion: new Date(),
+    nombre: '',
+    avatar: '',
+    direccion: '',
+    Telefono: '',
+    email: '',
+    id: ''
+  };
+  
 
 
   constructor(private activateRoute: ActivatedRoute,
@@ -26,12 +36,23 @@ export class ClienteComponent {
     
   }
 
-
-  editar() {
-    console.log('editado cliente')
+  
+  update() {
+    if (this.cliente && this.cliente.id) {
+      // El cliente tiene un ID, entonces es una edición
+      this.clienteService.updateCliente(this.cliente).subscribe(
+        response => {
+          console.log('Cliente editado exitosamente', response);
+          this.router.navigate(['/cliente']);
+        },
+        error => {
+          console.error('Error al editar cliente', error);
+        }
+      );
+    } else {
+      console.log('Error al editar cliente')
+    }
   }
   
-  
-
 
 }

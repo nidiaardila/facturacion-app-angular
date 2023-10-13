@@ -1,28 +1,29 @@
-/* Establece el contenedor principal en toda la altura y centra contenido */
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Ajusta el ancho de la tarjeta según tu preferencia */
-  .p-card {
-    width: 300px; /* Ajusta el ancho según tu preferencia */
-    text-align: left;
-  }
 
-  
-  .center-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
-  .p-card {
-    width: 300px; /* Ajusta el ancho según tu preferencia */
-    text-align: left;
-  }
-  
+
+.form-table td {
+  padding: 7px;
+}
+
+.form-table label {
+  display: block;
+  // margin-bottom: 5px;
+}
+
+.mi-card{
+  max-width:600px; 
+  margin: 0 auto; 
+  // padding: 1px;
+}
+
+
+.cliente-titulo{
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.button-cliente{
+  padding: 20px;
+  display: flex;
+  justify-content:space-around;
+}

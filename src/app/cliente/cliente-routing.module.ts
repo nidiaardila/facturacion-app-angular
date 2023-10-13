@@ -8,6 +8,7 @@ import { ClienteComponent } from './components/cliente/cliente.component';
 const routes: Routes = [
   {
     path:'',
+    // component: ListadoComponent,
     children:[
       {path: 'listado', component: ListadoComponent},
       {path: 'ver/:id', component: ClienteComponent},

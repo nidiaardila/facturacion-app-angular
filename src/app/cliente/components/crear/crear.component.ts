@@ -25,6 +25,7 @@ export class CrearComponent implements OnInit{
               private activatedRoute: ActivatedRoute,
               private router: Router){}
 
+
   ngOnInit(): void {
 
     if(!this.router.url.includes('editar')){
@@ -39,6 +40,11 @@ export class CrearComponent implements OnInit{
   }
 
 
+  guardarCliente() {
+    // Aquí puedes agregar la lógica para guardar el cliente
+    console.log('Cliente guardado:', this.cliente);
+  }
+
 
   guardarCambios(){
 
@@ -47,5 +53,7 @@ export class CrearComponent implements OnInit{
   eliminar(){
 
   }
+
+  
 
 }

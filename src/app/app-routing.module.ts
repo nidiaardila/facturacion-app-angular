@@ -10,11 +10,10 @@ const routes: Routes = [
     path: 'cliente',
     loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule)
   },
-  // {
-  //   path: '',
-  //   redirectTo: 'auth',
-  //   pathMatch: 'full'
-  // },
+  {
+    path: 'dashboard',
+    loadChildren:() => import ('./shared/shared.module').then (m => m.SharedModule)
+  },
   {
     path: '**',
     redirectTo: 'auth/login'

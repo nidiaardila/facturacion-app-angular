@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
 
@@ -11,40 +12,17 @@ export class SidemenuComponent {
 
   items: MenuItem[] | undefined;
 
-//   ngOnInit() {
-//     this.items = [
-//         {
-//             label: 'Clientes',
-//             icon: 'pi pi-fw pi-users',
-//         },
-//         {
-//             label: 'Productos',
-//             icon: 'pi pi-fw pi-credit-card',
-//         },
-//         {
-//             label: 'Facturas',
-//             icon: 'pi pi-fw pi-server',
-//         },
-//         {
-//             separator: true
-//         },
-//         {
-//             label: 'Salir',
-//             icon: 'pi pi-fw pi-power-off'
-//         }
-//     ];
-// }
 
 menuModel: any[];
 
-constructor() {
+constructor(private router: Router) {
   this.menuModel = [
     
     {
       label: 'Clientes',
       items: [
-        { label: 'Nuevo', icon: 'pi pi-plus', routerLink: '/clientes/nuevo' },
-        { label: 'Consultar', icon: 'pi pi-search', routerLink: '/clientes/consultar' },
+        { label: 'Nuevo', icon: 'pi pi-plus', routerLink: '/cliente/cliente' },
+        { label: 'Consultar', icon: 'pi pi-search', routerLink: '/cliente/listado' },
       ]
     },
     {
@@ -65,12 +43,17 @@ constructor() {
       label: 'Logout',
       icon: 'pi pi-sign-out',
       command: () => {
-        // Lógica para cerrar sesión
+        this.logout();
         console.log('Logout clicked');
       }
     }
   ];
 }
+
+logout() {
+  this.router.navigate(['./auth']);
+}
+
 }
 
 

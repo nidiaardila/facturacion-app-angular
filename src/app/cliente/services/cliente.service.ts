@@ -23,10 +23,13 @@ export class ClienteService {
     return this.http.get<Cliente>(`${this.url}/${ id }`)
   }
 
-  eliminar(id: string): Observable<any>{
-    return this.http.delete<any>(`${this.url}/${id}`);
+  deleteCliente(id: string): Observable<Cliente>{
+    return this.http.delete<Cliente>(`${this.url}/${id}`);
+  }
+
+  updateCliente(cliente: Cliente): Observable<Cliente>{
+    return this.http.put<Cliente>(`${this.url}/${cliente.id}`, cliente);  
   }
 
   
-
 }
