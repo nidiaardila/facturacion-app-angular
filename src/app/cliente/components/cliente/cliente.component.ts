@@ -26,7 +26,8 @@ export class ClienteComponent {
 
   constructor(private activateRoute: ActivatedRoute,
               private clienteService: ClienteService,
-              private router: Router){}
+              private router: Router){    
+              }
 
 
   ngOnInit(): void {
@@ -37,9 +38,9 @@ export class ClienteComponent {
   }
 
   
-  update() {
+  updateCreate() {
     if (this.cliente && this.cliente.id) {
-      // El cliente tiene un ID, entonces es una edición
+      // El cliente tiene un ID, entonces es una edición (update)
       this.clienteService.updateCliente(this.cliente).subscribe(
         response => {
           console.log('Cliente editado exitosamente', response);
@@ -50,8 +51,20 @@ export class ClienteComponent {
         }
       );
     } else {
-      console.log('Error al editar cliente')
+      // El cliente No tiene un ID, entonces es un cliente Nuevo (create)
+      this.clienteService.createCliente(this.cliente).subscribe(
+        cliente => {
+          this.router.navigate(['/cliente'])
+        }
+      )
+      console.log('Cliente creado')
     }
+  }
+
+  
+
+  create(){
+ console.log('cliente creado')
   }
   
 

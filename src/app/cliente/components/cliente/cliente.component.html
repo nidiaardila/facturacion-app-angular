@@ -17,12 +17,12 @@
 
 <div class="p-card mi-card" *ngIf="cliente">
 
-    <form #clienteForm="ngForm" (ngSubmit)="update()">
+    <form #clienteForm="ngForm" (ngSubmit)="updateCreate()">
             <table class="form-table">
               
               <tr>
                 <td><label for="avatar">ID:</label></td>
-                <td><input type="text" id="id" name="id" [(ngModel)]="cliente.id" placeholder="ID" class="p-inputtext" disabled></td>
+                <td><input type="text" id="id" name="id" [(ngModel)]="cliente.id" placeholder="ID" class="p-inputtext" required  disabled></td>
               </tr>
               <tr>
                 <td><label for="nombre">Nombre:</label></td>
@@ -30,19 +30,19 @@
               </tr>
               <tr>
                 <td><label for="avatar">Fecha de creación:</label></td>
-                <td><input type="text" id="fecha" name="fecha" [(ngModel)]="cliente.fechaCreacion" placeholder="Fecha de creación" class="p-inputtext" disabled></td>
+                <td><input type="text" id="fecha" name="fecha" [(ngModel)]="cliente.fechaCreacion" placeholder="Fecha de creación" class="p-inputtext" required disabled></td>
               </tr>
               <tr>
                 <td><label for="avatar">Dirección:</label></td>
-                <td><input type="text" id="direccion" name="direccion" [(ngModel)]="cliente.direccion" placeholder="Direccion" class="p-inputtext"></td>
+                <td><input type="text" id="direccion" name="direccion" [(ngModel)]="cliente.direccion" placeholder="Direccion" class="p-inputtext" required></td>
               </tr>
               <tr>
                 <td><label for="avatar">Teléfono:</label></td>
-                <td><input type="text" id="telefono" name="telefono" [(ngModel)]="cliente.Telefono" placeholder="Teléfono" class="p-inputtext"></td>
+                <td><input type="text" id="telefono" name="telefono" [(ngModel)]="cliente.Telefono" placeholder="Teléfono" class="p-inputtext" required ></td>
               </tr>
               <tr>
                 <td><label for="avatar">Email:</label></td>
-                <td><input type="text" id="email" name="email" [(ngModel)]="cliente.email" placeholder="Email" class="p-inputtext" disabled></td>
+                <td><input type="text" id="email" name="email" [(ngModel)]="cliente.email" placeholder="Email" class="p-inputtext" required  [disabled]="cliente.id ? true : false"></td>
               </tr>
               <tr>
                 <td><label for="avatar">Avatar:</label></td>

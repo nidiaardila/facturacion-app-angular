@@ -20,7 +20,7 @@ export class ClienteService {
   }
 
   getClienteId(id: string):Observable<Cliente>{
-    return this.http.get<Cliente>(`${this.url}/${ id }`)
+    return this.http.get<Cliente>(`${this.url}/${ id }`);
   }
 
   deleteCliente(id: string): Observable<Cliente>{
@@ -29,6 +29,10 @@ export class ClienteService {
 
   updateCliente(cliente: Cliente): Observable<Cliente>{
     return this.http.put<Cliente>(`${this.url}/${cliente.id}`, cliente);  
+  }
+
+  createCliente(cliente: Cliente): Observable<Cliente>{
+    return this.http.post<Cliente>(`${this.url}`, cliente);
   }
 
   
