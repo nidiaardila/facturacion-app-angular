@@ -6,11 +6,6 @@ import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 
 
-
-
-
-
-
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
@@ -19,6 +14,7 @@ import { ConfirmationService } from 'primeng/api';
 export class ListadoComponent implements OnInit {
 
   clientes: Cliente[]  = [];
+  
 
   constructor (private clienteService: ClienteService,
                private router: Router,
@@ -44,18 +40,4 @@ export class ListadoComponent implements OnInit {
   }
 
 
-  
-  
-
-  
-  AgregarCliente(){
-
-  }
-
-  
- 
-
-
-
 }
- 

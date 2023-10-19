@@ -1,0 +1,58 @@
+
+<app-toolbar></app-toolbar>
+<app-sidemenu></app-sidemenu>
+
+<div class="card">
+
+    <p-table [value]="productos" [paginator]="true" [rows]="25">
+
+        <ng-template pTemplate="header">
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Fecha de creación</th>
+              <th>Avatar</th>
+              <th>Precio de Compra</th>
+              <th>Precio de Venta</th>
+              <th>Descripcion</th>
+              
+              <th>Acciones</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-producto>
+            <tr>
+              <td>{{ producto.id }}</td>
+              <td>{{ producto.nombre }}</td>
+              <td>{{ producto.createdAt | date }}</td>
+              <td><img [src]="producto.avatar" alt="Avatar" width="50" height="50"></td>
+              <td>{{ producto.precioCompra }}</td>
+              <td>{{ producto.precioVenta }}</td>
+              <td style="max-width: 350px;">{{ producto.descripcion }}</td>
+              <td>
+                <button pButton icon="pi pi-user-edit" 
+                        class="mr-1 p-button-sm"
+                        [routerLink]="['/producto/ver', producto.id]">
+                <span class="icon-text-gap"></span> <!-- Espaciador -->
+                edit
+                </button>
+                <button pButton icon="pi pi-delete-left"
+                        class="p-button-danger p-button-sm"
+                        (click)="delete(producto)">
+                <span class="icon-text-gap"></span> <!-- Espaciador -->
+                delete
+                </button>
+                 
+              </td>
+            </tr>
+          </ng-template>
+
+    </p-table>
+
+</div>
+
+
+
+    
+    
+   
+   

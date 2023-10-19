@@ -1,0 +1,68 @@
+<app-toolbar></app-toolbar>
+<app-sidemenu></app-sidemenu>
+
+<div *ngIf="!producto">
+    <p>Cargando información del producto...</p>
+  
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  
+  <h3 class="producto-titulo">  {{ ( producto.id )? 'Editar' : 'Nuevo' }}
+    Producto:
+    <small>{{ producto.nombre }}</small> 
+  </h3>
+  
+  
+  <div class="p-card mi-card" *ngIf="producto">
+  
+      <form #productoForm="ngForm" (ngSubmit)="updateCreate()">
+              <table class="form-table">
+                
+                <tr>
+                  <td><label for="avatar">ID:</label></td>
+                  <td><input type="text" id="id" name="id" [(ngModel)]="producto.id" placeholder="ID" class="p-inputtext" required  disabled></td>
+                </tr>
+                <tr>
+                  <td><label for="nombre">Nombre:</label></td>
+                  <td><input type="text" id="nombre" name="nombre" [(ngModel)]="producto.nombre" placeholder="Nombre" class="p-inputtext" required></td>
+                </tr>
+                <tr>
+                  <td><label for="avatar">Fecha de creación:</label></td>
+                  <td><input type="text" id="fecha" name="fecha" [(ngModel)]="producto.createdAt" placeholder="Fecha de creación" class="p-inputtext" required disabled></td>
+                </tr>
+                <tr>
+                  <td><label for="avatar">Precio de Compra:</label></td>
+                  <td><input type="text" id="precioCompra" name="precioCompra" [(ngModel)]="producto.precioCompra" placeholder="precio de compra" class="p-inputtext" required></td>
+                </tr>
+                <tr>
+                  <td><label for="avatar">Precio de Venta:</label></td>
+                  <td><input type="text" id="precioVenta" name="precioVenta" [(ngModel)]="producto.precioVenta" placeholder="precio de venta" class="p-inputtext" required ></td>
+                </tr>
+                <tr>
+                  <td><label for="avatar">Descripción:</label></td>
+                  <td><textarea type="text" id="descripcion" name="descripcion" [(ngModel)]="producto.descripcion" placeholder="descripcion" class="p-inputtext" rows="4" required  [disabled]="producto.id ? true : false"></textarea>
+                </tr>
+                <tr>
+                  <td><label for="avatar">Avatar:</label></td>
+          
+                  <td> <img [src]="producto.avatar" alt="Avatar" width="90" height="90"></td>
+                </tr>
+              </table> 
+  
+              <div class="button-producto">
+                <button type="button" 
+                        pButton icon="pi pi-times" 
+                        label="Cancelar" 
+                        class="p-button-secondary p-button-sm"
+                        [routerLink]="['producto/listado']">
+                </button>
+                <button type="submit" 
+                        pButton icon="pi pi-check" 
+                        [label]="(producto.id) ? 'Editar' : 'Crear'" 
+                        class=" p-button-sm">
+                </button>
+              </div>
+        
+      </form>
+  </div>
+  

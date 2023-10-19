@@ -60,12 +60,6 @@ export class ClienteComponent {
       console.log('Cliente creado')
     }
   }
-
-  
-
-  create(){
- console.log('cliente creado')
-  }
   
 
 }

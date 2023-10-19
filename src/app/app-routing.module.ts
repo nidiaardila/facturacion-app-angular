@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProductoModule } from './producto/producto.module';
 
 const routes: Routes = [
   {
@@ -10,9 +11,13 @@ const routes: Routes = [
     path: 'cliente',
     loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule)
   },
+  // {
+  //   path: 'dashboard',
+  //   loadChildren:() => import ('./shared/shared.module').then (m => m.SharedModule)
+  // },
   {
-    path: 'dashboard',
-    loadChildren:() => import ('./shared/shared.module').then (m => m.SharedModule)
+    path: 'producto',
+    loadChildren:() => import ('./producto/producto.module').then (m => ProductoModule)
   },
   {
     path: '**',

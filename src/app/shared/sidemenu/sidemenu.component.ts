@@ -28,8 +28,8 @@ constructor(private router: Router) {
     {
         label: 'Productos',
         items: [
-          { label: 'Nuevo', icon: 'pi pi-plus', routerLink: '/productos/nuevo' },
-          { label: 'Consultar', icon: 'pi pi-search', routerLink: '/productos/consultar' },
+          { label: 'Nuevo', icon: 'pi pi-plus', routerLink: '/producto/producto' },
+          { label: 'Consultar', icon: 'pi pi-search', routerLink: '/producto/listado' },
         ]
       },
     {
