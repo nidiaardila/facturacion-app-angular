@@ -35,8 +35,8 @@ constructor(private router: Router) {
     {
       label: 'Facturas',
       items: [
-        { label: 'Nuevo', icon: 'pi pi-plus', routerLink: '/facturas/nuevo' },
-        { label: 'Consultar', icon: 'pi pi-search', routerLink: '/facturas/consultar' },
+        { label: 'Nuevo', icon: 'pi pi-plus', routerLink: '/factura/factura' },
+        { label: 'Consultar', icon: 'pi pi-search', routerLink: '/factura/listado' },
       ]
     },
     {

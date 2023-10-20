@@ -52,22 +52,14 @@ export class ProductoComponent {
        );
     }else {
        // El producto No tiene un ID, entonces es un producto Nuevo (create)
-       
+       this.productoService.createProducto(this.producto).subscribe(
+        producto => {
+          this.router.navigate(['/producto'])
+        }
+       )
+       console.log('Cliente creado')
     }
  }
-
-
- 
-//    else {
-    
-//     this.clienteService.createCliente(this.cliente).subscribe(
-//       cliente => {
-//         this.router.navigate(['/cliente'])
-//       }
-//     )
-//     console.log('Cliente creado')
-//   }
-// }
 
 
 

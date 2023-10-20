@@ -28,7 +28,7 @@ export class ProductoService {
     return this.http.put<Producto>(`${this.url}/${producto.id}`, producto);
   }
 
-  createProducto(){
-    
+  createProducto(producto: Producto):Observable<Producto>{
+    return this.http.post<Producto>(`${this.url}`, producto);
   }
 }

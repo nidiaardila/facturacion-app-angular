@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ListadoComponent implements OnInit {
 
+
   productos: Producto [] = [];
 
   constructor(private productoService: ProductoService,
