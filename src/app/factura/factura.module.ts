@@ -8,6 +8,8 @@ import { SharedModule } from '../shared/shared.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FacturaService } from './services/factura.service';
+import { ClienteModule } from '../cliente/cliente.module';
+import { ProductoModule } from '../producto/producto.module';
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { FacturaService } from './services/factura.service';
     FacturaRoutingModule,
     HttpClientModule,
     SharedModule,
-    PrimeNgModule
+    PrimeNgModule,
+    
   ]
 })
 export class FacturaModule { }

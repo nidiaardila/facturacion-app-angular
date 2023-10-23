@@ -1,3 +1,50 @@
 
 <app-toolbar></app-toolbar>
 <app-sidemenu></app-sidemenu>
+
+<!-- <div class="invoice">
+    <div class="header">
+      <h1>Factura</h1>
+      <div class="invoice-details">
+        <p>Folio: {{ factura.folio }}</p>
+        <p>Fecha: {{ factura.createdAt | date:'dd/MM/yyyy' }}</p>
+      </div>
+    </div>
+  
+    <div class="company-info">
+      <h2>{{ factura.empresa }}</h2>
+      <p>RUT: {{ factura.rut }}</p>
+    </div>
+  
+    <div class="customer-info">
+      <h3>Cliente</h3>
+      <p>{{ factura.cliente.nombre }}</p>
+      <p>{{ factura.cliente.direccion }}</p>
+    </div>
+  
+    <table class="invoice-items">
+      <thead>
+        <tr>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th>Precio Unitario</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of factura.items">
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.precioVenta }}</td>
+          <td>{{ item.precioVenta| currency }}</td>
+          
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="invoice-summary">
+      <p>Subtotal: {{ factura.subtotal | currency }}</p>
+      <p>IVA ({{ factura.iva }}%): {{ (factura.iva / 100 * factura.subtotal) | currency }}</p>
+      <p>Total: {{ factura.total | currency }}</p>
+    </div>
+  </div>
+   -->
