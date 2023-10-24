@@ -1,0 +1,62 @@
+.form-table td {
+  padding: 7px;
+}
+
+.form-table label {
+  display: block;
+}
+
+.mi-card{
+  max-width:600px; 
+  margin: 0 auto;
+}
+
+
+.cliente-titulo{
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.button-factura{
+  padding: 20px;
+  display: flex;
+  justify-content:space-around;
+}
+
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.custom-select select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+// .custom-select select::before {
+//   content: '\25BC';
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   padding: 10px;
+//   background-color: #f7f7f7;
+//   pointer-events: none;
+// }
+
+// .custom-select select[disabled] {
+//   background-color: #eee;
+//   cursor: not-allowed;
+// }
+
+// .custom-select select[disabled]::before {
+//   color: #ccc;
+// }

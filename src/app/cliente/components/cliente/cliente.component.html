@@ -21,7 +21,7 @@
             <table class="form-table">
               
               <tr>
-                <td><label for="avatar">ID:</label></td>
+                <td><label for="id">ID:</label></td>
                 <td><input type="text" id="id" name="id" [(ngModel)]="cliente.id" placeholder="ID" class="p-inputtext" required  disabled></td>
               </tr>
               <tr>
@@ -29,24 +29,23 @@
                 <td><input type="text" id="nombre" name="nombre" [(ngModel)]="cliente.nombre" placeholder="Nombre" class="p-inputtext" required></td>
               </tr>
               <tr>
-                <td><label for="avatar">Fecha de creación:</label></td>
+                <td><label for="fecha">Fecha de creación:</label></td>
                 <td><input type="text" id="fecha" name="fecha" [(ngModel)]="cliente.fechaCreacion" placeholder="Fecha de creación" class="p-inputtext" required disabled></td>
               </tr>
               <tr>
-                <td><label for="avatar">Dirección:</label></td>
+                <td><label for="direccion">Dirección:</label></td>
                 <td><input type="text" id="direccion" name="direccion" [(ngModel)]="cliente.direccion" placeholder="Direccion" class="p-inputtext" required></td>
               </tr>
               <tr>
-                <td><label for="avatar">Teléfono:</label></td>
+                <td><label for="telefono">Teléfono:</label></td>
                 <td><input type="text" id="telefono" name="telefono" [(ngModel)]="cliente.Telefono" placeholder="Teléfono" class="p-inputtext" required ></td>
               </tr>
               <tr>
-                <td><label for="avatar">Email:</label></td>
+                <td><label for="email">Email:</label></td>
                 <td><input type="text" id="email" name="email" [(ngModel)]="cliente.email" placeholder="Email" class="p-inputtext" required  [disabled]="cliente.id ? true : false"></td>
               </tr>
               <tr>
                 <td><label for="avatar">Avatar:</label></td>
-        
                 <td> <img [src]="cliente.avatar" alt="Avatar" width="90" height="90"></td>
               </tr>
             </table> 

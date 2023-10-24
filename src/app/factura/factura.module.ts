@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FacturaService } from './services/factura.service';
 import { ClienteModule } from '../cliente/cliente.module';
 import { ProductoModule } from '../producto/producto.module';
+import { FormsModule } from '@angular/forms';
+import { ClienteService } from '../cliente/services/cliente.service';
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { ProductoModule } from '../producto/producto.module';
     ListadoComponent
   ],
   providers: [
-    FacturaService
+    FacturaService,
+    ClienteService
  ],
   imports: [
     CommonModule,
@@ -26,6 +29,8 @@ import { ProductoModule } from '../producto/producto.module';
     HttpClientModule,
     SharedModule,
     PrimeNgModule,
+    FormsModule
+    
     
   ]
 })

@@ -86,15 +86,14 @@
           <td>{{ factura.iva }}</td>
           <td>{{ factura.total }}</td>
           <td>
-              <button pButton icon="pi pi-user-edit" 
+              <button pButton icon="pi pi-external-link" 
                       class="mr-1 p-button-sm"
-                      [routerLink]="['/cliente/ver', factura.id]">
+                      [routerLink]="['/factura/ver', factura.id]">
                       <span class="icon-text-gap"></span> <!-- Espaciador -->
-                      edit
+                      ver...
               </button>
               <button pButton icon="pi pi-delete-left"
-                      class="p-button-danger p-button-sm"
-                      >
+                      class="p-button-danger p-button-sm">
                       <span class="icon-text-gap"></span> <!-- Espaciador -->
                       delete
               </button>

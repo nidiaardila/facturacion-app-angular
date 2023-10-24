@@ -2,30 +2,164 @@
 <app-toolbar></app-toolbar>
 <app-sidemenu></app-sidemenu>
 
-<!-- <div class="invoice">
-    <div class="header">
-      <h1>Factura</h1>
-      <div class="invoice-details">
-        <p>Folio: {{ factura.folio }}</p>
-        <p>Fecha: {{ factura.createdAt | date:'dd/MM/yyyy' }}</p>
-      </div>
-    </div>
+
+<div *ngIf="!factura">
+  <p>Cargando información del cliente...</p>
+
+  <p-progressSpinner></p-progressSpinner>
+</div>
+
+
+<h3 class="cliente-titulo">  {{ ( factura.id )? 'Editar' : 'Nuevo' }}
+  Cliente:
+  <small>{{ factura.id }}</small> 
+</h3>
+
+
+<div class="p-card mi-card" *ngIf="factura">
+
+    <form #facturaForm="ngForm" (ngSubmit)="updateCreate()">
+            <table class="form-table">
+
+          
+              <tr>
+                <td><label for="id">ID:</label></td>
+                <td><input type="text" id="id" name="id" [(ngModel)]="factura.id" placeholder="ID" class="p-inputtext" required  disabled></td>
+              </tr>
+              <tr>
+                <td><label for="rut">Rut:</label></td>
+                <td><input type="text" id="rut" name="rut" [(ngModel)]="factura.rut" placeholder="Rut" class="p-inputtext" required></td>
+              </tr>
+              <tr>
+                <td><label for="empresa">Empresa:</label></td>
+                <td><input type="text" id="empresa" name="empresa" [(ngModel)]="factura.empresa" placeholder="Empresa" class="p-inputtext" required disabled></td>
+              </tr>
+              <tr>
+                <td><label for="fecha">Fecha:</label></td>
+                <td><input type="text" id="fecha" name="fecha" [(ngModel)]="factura.createdAt" placeholder="Fecha" class="p-inputtext" required></td>
+              </tr>
+              <tr>
+                <td><label for="folio">Folio:</label></td>
+                <td><input type="folio" id="folio" name="folio" [(ngModel)]="factura.folio" placeholder="Folio" class="p-inputtext" required ></td>
+              </tr>
+              <tr>
+                <td><label for="item">Producto:</label></td>
+                <td><input type="text" id="item" name="item" [(ngModel)]="factura.items" placeholder="item" class="p-inputtext" required  [disabled]="factura.id ? true : false"></td>
+              </tr>
+            
+              
+              
+
+
+              <tr>
+                <td><label for="cliente">Cliente:</label></td>
+                <td>
+                  <div class="custom-select">
+                    <select id="cliente" name="cliente" [(ngModel)]="factura.cliente" class="p-inputtext" required>
+                      <option value="" disabled selected>Seleccione Cliente</option>
+                      <option *ngFor="let cliente of clientes" [value]="cliente">{{ cliente.nombre }}</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              
+              
+              
+              <tr>
+                <td><label for="subtotal">Subtotal:</label></td>
+                <td><input type="text" id="subtotal" name="subtotal" [(ngModel)]="factura.subtotal" placeholder="Subtotal" class="p-inputtext" required  [disabled]="factura.id ? true : false"></td>
+              </tr>
+              <tr>
+                <td><label for="iva">iva:</label></td>
+                <td><input type="text" id="iva" name="iva" [(ngModel)]="factura.iva" placeholder="iva" class="p-inputtext" required  [disabled]="factura.id ? true : false"></td>
+              </tr>
+              <tr>
+                <td><label for="total">Total:</label></td>
+                <td><input type="text" id="total" name="total" [(ngModel)]="factura.total" placeholder="Total" class="p-inputtext" required  [disabled]="factura.id ? true : false"></td>
+              </tr>
+             
+            </table> 
+
+            <div class="button-factura">
+              <button type="button" 
+                      pButton icon="pi pi-times" 
+                      label="Cancelar" 
+                      class="p-button-secondary p-button-sm"
+                      [routerLink]="['factura/listado']">
+              </button>
+              <button type="submit" 
+                      pButton icon="pi pi-check" 
+                      [label]="(factura.id) ? 'Editar' : 'Crear'" 
+                      class=" p-button-sm">
+              </button>
+            </div>
+      
+    </form>
+</div>
+
+
+
+
+   <!-- <div *ngIf="factura">
+    <h1>Detalles de Factura</h1>
+    <p><strong>Folio:</strong> {{ factura.folio }}</p>
+    <p><strong>Empresa:</strong> {{ factura.empresa }}</p>
+    <p><strong>RUT:</strong> {{ factura.rut }}</p>
   
-    <div class="company-info">
-      <h2>{{ factura.empresa }}</h2>
-      <p>RUT: {{ factura.rut }}</p>
-    </div>
+    <h2>Cliente</h2>
+    <p><strong>Nombre del Cliente:</strong> {{ factura.cliente.nombre }}</p>
+    <p><strong>Dirección del Cliente:</strong> {{ factura.cliente.direccion }}</p>
   
-    <div class="customer-info">
-      <h3>Cliente</h3>
-      <p>{{ factura.cliente.nombre }}</p>
-      <p>{{ factura.cliente.direccion }}</p>
-    </div>
+    <h2>Ítems</h2>
+    <ul>
+      <li *ngFor="let item of factura.items">
+        <p><strong>Producto:</strong> {{ item.nombre }}</p>
+        <p><strong>Cantidad:</strong> {{ item.id }}</p>
+        <p><strong>Precio Unitario:</strong> {{ item.precioCompra| currency }}</p>
+        <p><strong>Subtotal:</strong> {{ item.precioVenta| currency }}</p>
+      </li>
+    </ul>
   
-    <table class="invoice-items">
+    <p><strong>Subtotal:</strong> {{ factura.subtotal | currency }}</p>
+    <p><strong>IVA ({{ factura.iva }}%):</strong> {{ (factura.iva / 100 * factura.subtotal) | currency }}</p>
+    <p><strong>Total:</strong> {{ factura.total | currency }}</p>
+  </div>
+   -->
+
+   <!-- <div *ngIf="factura" class="center-content">
+    <h1>Detalles de Factura</h1>
+    <table class="table table-striped">
+      <tr>
+        <th>Folio</th>
+        <td>{{ factura.folio }}</td>
+      </tr>
+      <tr>
+        <th>Empresa</th>
+        <td>{{ factura.empresa }}</td>
+      </tr>
+      <tr>
+        <th>RUT</th>
+        <td>{{ factura.rut }}</td>
+      </tr>
+    </table>
+  
+    <h2>Cliente</h2>
+    <table class="table table-striped">
+      <tr>
+        <th>Nombre del Cliente</th>
+        <td>{{ factura.cliente.nombre }}</td>
+      </tr>
+      <tr>
+        <th>Dirección del Cliente</th>
+        <td>{{ factura.cliente.direccion }}</td>
+      </tr>
+    </table>
+  
+    <h2>Ítems</h2>
+    <table class="table table-striped">
       <thead>
         <tr>
-          <th>Descripción</th>
+          <th>Producto</th>
           <th>Cantidad</th>
           <th>Precio Unitario</th>
           <th>Subtotal</th>
@@ -34,17 +168,203 @@
       <tbody>
         <tr *ngFor="let item of factura.items">
           <td>{{ item.nombre }}</td>
-          <td>{{ item.precioVenta }}</td>
+          <td> item.cantidad </td>
           <td>{{ item.precioVenta| currency }}</td>
-          
+          <td> item.subtotal | currency </td>
         </tr>
       </tbody>
     </table>
   
-    <div class="invoice-summary">
-      <p>Subtotal: {{ factura.subtotal | currency }}</p>
-      <p>IVA ({{ factura.iva }}%): {{ (factura.iva / 100 * factura.subtotal) | currency }}</p>
-      <p>Total: {{ factura.total | currency }}</p>
+    <table class="table table-striped">
+      <tr>
+        <th>Subtotal</th>
+        <td>{{ factura.subtotal | currency }}</td>
+      </tr>
+      <tr>
+        <th>IVA ({{ factura.iva }}%)</th>
+        <td>{{ (factura.iva / 100 * factura.subtotal) | currency }}</td>
+      </tr>
+      <tr>
+        <th>Total</th>
+        <td>{{ factura.total | currency }}</td>
+      </tr>
+    </table>
+  </div> -->
+
+  <!-- <div class="container factura">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h1>Detalles de Factura</h1>
+          </div>
+          <div class="card-body ">
+            <table class="table table-bordered table-responsive">
+              <tr>
+                <th>Folio</th>
+                <td>{{ factura.folio }}</td>
+              </tr>
+              <tr>
+                <th>Empresa</th>
+                <td>{{ factura.empresa }}</td>
+              </tr>
+              <tr>
+                <th>RUT</th>
+                <td>{{ factura.rut }}</td>
+              </tr>
+            </table>
+  
+            <h2>Cliente</h2>
+            <table class="table table-bordered">
+              <tr>
+                <th>Nombre del Cliente</th>
+                <td>{{ factura.cliente.nombre }}</td>
+              </tr>
+              <tr>
+                <th>Dirección del Cliente</th>
+                <td>{{ factura.cliente.direccion }}</td>
+              </tr>
+            </table>
+  
+            <h2>Ítems</h2>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Precio Unitario</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of factura.items">
+                  <td>{{ item.nombre }}</td>
+                  <td> item.cantidad </td>
+                  <td>{{ item.precioVenta| currency }}</td>
+                  <td> item.subtotal | currency </td>
+                </tr>
+              </tbody>
+            </table>
+  
+            <table class="table table-bordered">
+              <tr>
+                <th>Subtotal</th>
+                <td>{{ factura.subtotal | currency }}</td>
+              </tr>
+              <tr>
+                <th>IVA ({{ factura.iva }}%)</th>
+                <td>{{ (factura.iva / 100 * factura.subtotal) | currency }}</td>
+              </tr>
+              <tr>
+                <th>Total</th>
+                <td>{{ factura.total | currency }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="button-factura">
+    <button type="button" 
+            pButton icon="pi pi-times" 
+            label="Cancelar" 
+            class="p-button-secondary p-button-sm"
+            [routerLink]="['cliente/listado']">
+    </button>
+    <button type="submit" 
+            pButton icon="pi pi-check" 
+            [label]="(factura.id) ? 'Editar' : 'Crear'" 
+            class=" p-button-sm">
+    </button>
+  </div> -->
+
+  <!-- <div class="container factura">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h1>Detalles de Factura</h1>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered table-responsive">
+              <tr>
+                <th>Folio</th>
+                <td><input factura.folio></td>
+              </tr>
+              <tr>
+                <th>Empresa</th>
+                <td><input [(ngModel)]="factura.cliente.nombre" ></td>
+              </tr>
+              <tr>
+                <th>RUT</th>
+                <td><input factura ></td>
+              </tr>
+            </table>
+  
+            <h2>Cliente</h2>
+            <table class="table table-bordered">
+              <tr>
+                <th>Nombre del Cliente</th>
+                <td><input factura.cliente.nombre></td>
+              </tr>
+              <tr>
+                <th>Dirección del Cliente</th>
+                <td><input factura.cliente.direccion></td>
+              </tr>
+            </table>
+  
+            <h2>Ítems</h2>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Precio Unitario</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of factura.items">
+                  <td>{{ item.nombre }}</td>
+                  <td> item.cantidad</td>
+                  <td>{{ item.precioVenta | currency }}</td>
+                  <td> item.subtotal | currency </td>
+                </tr>
+              </tbody>
+            </table>
+  
+            <table class="table table-bordered">
+              <tr>
+                <th>Subtotal</th>
+                <td>{{ factura.subtotal | currency }}</td>
+              </tr>
+              <tr>
+                <th>IVA ({{ factura.iva }}%)</th>
+                <td>{{ (factura.iva / 100 * factura.subtotal) | currency }}</td>
+              </tr>
+              <tr>
+                <th>Total</th>
+                <td>{{ factura.total | currency }}</td>
+              </tr>
+            </table>
+  
+            <div >
+              <button >Guardar Cambios</button>
+              <button >Cancelar Edición</button>
+            </div>
+            <div >
+              <button >Editar Folio</button>
+              <button >Editar Empresa</button>
+              <button >Editar RUT</button>
+              <button >Editar Cliente</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
    -->
+  

@@ -17,4 +17,8 @@ export class FacturaService {
     return this.http.get<Factura[]>(`${this.url}`)
   }
 
+  getFacturaId(id: string):Observable<Factura>{
+    return this.http.get<Factura>(`${this.url}/${id}`);
+  }
+
 }
