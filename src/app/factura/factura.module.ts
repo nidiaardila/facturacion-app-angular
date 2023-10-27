@@ -12,6 +12,7 @@ import { ClienteModule } from '../cliente/cliente.module';
 import { ProductoModule } from '../producto/producto.module';
 import { FormsModule } from '@angular/forms';
 import { ClienteService } from '../cliente/services/cliente.service';
+import { ProductoService } from '../producto/services/producto.service';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ClienteService } from '../cliente/services/cliente.service';
   ],
   providers: [
     FacturaService,
-    ClienteService
+    ClienteService,
+    ProductoService
  ],
   imports: [
     CommonModule,

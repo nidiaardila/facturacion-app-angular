@@ -34,9 +34,7 @@ export class ListadoComponent implements OnInit {
 
   delete(cliente: Cliente){
     this.clienteService.deleteCliente(cliente.id)
-    .subscribe( resp => {
-      this.getListadoClientes()
-    })
+    .subscribe( resp => { this.getListadoClientes()})
   }
 
 

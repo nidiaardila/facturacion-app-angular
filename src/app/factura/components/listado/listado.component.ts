@@ -25,6 +25,11 @@ export class ListadoComponent {
     this.facturaService.getFacturas()
     .subscribe(facturas => this.facturas = facturas)
   }
+
+  delete(factura : Factura){
+       this.facturaService.deleteFactura(factura.id )
+       .subscribe(resp => { this.getListadoFacturas()})
+  }
   
 
 

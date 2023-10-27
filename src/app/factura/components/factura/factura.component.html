@@ -36,34 +36,92 @@
               </tr>
               <tr>
                 <td><label for="fecha">Fecha:</label></td>
-                <td><input type="text" id="fecha" name="fecha" [(ngModel)]="factura.createdAt" placeholder="Fecha" class="p-inputtext" required></td>
+                <td><input type="text" id="fecha" name="fecha" [(ngModel)]="factura.createdAt" placeholder="Fecha" class="p-inputtext"  required></td>
               </tr>
               <tr>
                 <td><label for="folio">Folio:</label></td>
                 <td><input type="folio" id="folio" name="folio" [(ngModel)]="factura.folio" placeholder="Folio" class="p-inputtext" required ></td>
               </tr>
-              <tr>
-                <td><label for="item">Producto:</label></td>
-                <td><input type="text" id="item" name="item" [(ngModel)]="factura.items" placeholder="item" class="p-inputtext" required  [disabled]="factura.id ? true : false"></td>
-              </tr>
+              
+              
+             
+
             
-              
-              
-
-
               <tr>
                 <td><label for="cliente">Cliente:</label></td>
                 <td>
                   <div class="custom-select">
-                    <select id="cliente" name="cliente" [(ngModel)]="factura.cliente" class="p-inputtext" required>
-                      <option value="" disabled selected>Seleccione Cliente</option>
-                      <option *ngFor="let cliente of clientes" [value]="cliente">{{ cliente.nombre }}</option>
-                    </select>
+                    <label class="select-label">Seleccione un Cliente:</label>
+                    <div class="select-wrapper">
+                      <select id="cliente" name="cliente" [(ngModel)]="factura.cliente" class="p-inputtext" required>
+                        <option value="" disabled selected>Seleccione Cliente...</option>
+                        <option *ngFor="let cliente of clientes" [value]="cliente" >{{ cliente.nombre }}</option>
+                      </select>
+                    </div>
                   </div>
                 </td>
               </tr>
+
+              <tr>
+                <td><label for="productos">Productos:</label></td>
+                <td>
+                  <div class="custom-select">
+                    <div class="select-wrapper">
+                      <select id="productos" name="productos" [(ngModel)]="factura.items" class="p-inputtext" required >
+                        <option value="" disabled selected>Seleccione Producto...</option>
+                        <option *ngFor="let item of items" [value]="item" (click)="seleccionarProducto(item)">{{ item.nombre }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- <tr>
+                <td><label for="productos">Productos:</label></td>
+                <td>
+                  <div class="custom-select">
+                    <div class="select-wrapper">
+                       Muestra los productos seleccionados y las cantidades
+                      <table>
+                        <tr *ngFor="let producto of productosSeleccionados">
+                          <td>{{ producto.nombre }}</td>
+                          <td><input type="number" [(ngModel)]="cantidadProductos[producto.id]" min="1" /></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+               -->
+
+
               
+
               
+            <div>
+              <h2>Productos Seleccionados</h2>
+              <table>
+                <tr>
+                  <th>Cantidad</th>
+
+                  <th>Nombre</th>
+                  <th>Precio</th>
+                  <th>iva</th>
+                  <!-- Agrega más encabezados de columna según tus necesidades -->
+                </tr>
+                <tr *ngFor="let producto of productosSeleccionados">
+                  <td>
+                    <input type="number" name="item" [(ngModel)]="cantidadProductos[producto.id]" [ngModelOptions]="{standalone: true}" min="1" style="width: 50px;">
+                  </td>
+
+                  <td>{{ producto.nombre }}</td>
+                  <td>{{ producto.precioVenta }}</td>
+                  <td> 16% </td>
+                  <!-- Agrega más celdas de datos según las propiedades del producto -->
+                </tr>
+              </table>
+            </div>
+            
               
               <tr>
                 <td><label for="subtotal">Subtotal:</label></td>
@@ -79,6 +137,34 @@
               </tr>
              
             </table> 
+
+
+            <div>
+              <h2>Productos Seleccionados</h2>
+              <table>
+                <tr>
+                  <th>Cantidad</th>
+
+                  <th>Nombre</th>
+                  <th>Precio</th>
+                  <th>iva</th>
+                  <!-- Agrega más encabezados de columna según tus necesidades -->
+                </tr>
+                <tr *ngFor="let producto of productosSeleccionados">
+                  <td>
+                    <input type="number" name="item" [(ngModel)]="cantidadProductos[producto.id]" [ngModelOptions]="{standalone: true}" min="1" style="width: 50px;">
+                  </td>
+
+                  <td>{{ producto.nombre }}</td>
+                  <td>{{ producto.precioVenta }}</td>
+                  <td> 16% </td>
+                  <!-- Agrega más celdas de datos según las propiedades del producto -->
+                </tr>
+              </table>
+            </div>
+            
+            
+            
 
             <div class="button-factura">
               <button type="button" 
@@ -191,7 +277,7 @@
     </table>
   </div> -->
 
-  <!-- <div class="container factura">
+  <!-- <!-- <div class="container factura">
     <div class="row">
       <div class="col-sm-12">
         <div class="card">

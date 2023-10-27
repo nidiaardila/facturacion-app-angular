@@ -11,7 +11,6 @@
   margin: 0 auto;
 }
 
-
 .cliente-titulo{
   text-align: center;
   margin-top: 20px;
@@ -23,7 +22,6 @@
   display: flex;
   justify-content:space-around;
 }
-
 
 .custom-select {
   position: relative;
@@ -42,21 +40,12 @@
   cursor: pointer;
 }
 
-// .custom-select select::before {
-//   content: '\25BC';
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   padding: 10px;
-//   background-color: #f7f7f7;
-//   pointer-events: none;
-// }
+.select-label {
+  font-weight: bold; 
+  color: #494949; 
+}
 
-// .custom-select select[disabled] {
-//   background-color: #eee;
-//   cursor: not-allowed;
-// }
-
-// .custom-select select[disabled]::before {
-//   color: #ccc;
-// }
+label {
+  color: #333;
+  font-weight: bold;
+}
