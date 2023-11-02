@@ -6,9 +6,14 @@
   display: block;
 }
 
-.mi-card{
-  max-width:600px; 
+.mi-card {
+  max-width: 600px;
   margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
 
 .cliente-titulo{
@@ -23,10 +28,16 @@
   justify-content:space-around;
 }
 
-.custom-select {
-  position: relative;
-  display: inline-block;
+.p-inputtext {
   width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.p-inputtext[disabled] {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
 }
 
 .custom-select select {
@@ -45,7 +56,30 @@
   color: #494949; 
 }
 
-label {
-  color: #333;
-  font-weight: bold;
+.product-table{
+  width: 100%;
 }
+
+/* Aplica espacio horizontal en las celdas de la tabla */
+.product-table th, .product-table td {
+  padding-left: 10px; /* Espacio a la izquierda */
+  padding-right: 10px; /* Espacio a la derecha */
+}
+
+
+/* Estilos para las etiquetas de totales */
+.total-label {
+  font-weight: bold; /* Hace que el texto sea más audaz */
+  font-size: 18px; /* Ajusta el tamaño de fuente */
+  color: #333; /* Cambia el color de texto si es necesario */
+}
+
+/* Estilos para los valores de totales */
+.total-value {
+  font-weight: bold; /* Hace que el texto sea más audaz */
+  font-size: 18px; /* Ajusta el tamaño de fuente */
+  color: #007bff; /* Cambia el color de texto si es necesario */
+}
+
+
+

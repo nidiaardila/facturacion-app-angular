@@ -25,4 +25,12 @@ export class FacturaService {
     return this.http.delete<Factura>(`${this.url}/${id}`);
   }
 
+  updateFactura(factura: Factura): Observable<Factura>{
+    return this.http.put<Factura>(`${this.url}`, factura);
+  }
+
+  createFactura(factura: Factura): Observable<Factura>{
+    return this.http.post<Factura>(`${this.url}`, factura);
+  }
+
 }

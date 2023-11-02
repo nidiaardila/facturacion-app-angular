@@ -29,15 +29,47 @@ export class FacturaComponent {
 
   cantidadProductos: { [productoId: string]: number } = {};
 
+  subtotalProductos: number = 0;
 
+  calcularSubtotal(producto: Producto): number {
+    const cantidad = this.cantidadProductos[producto.id];
+    const precio = parseFloat(producto.precioVenta);
+    return cantidad * precio;
+  }
+
+ actualizarSubtotalTotal(){
+  for(const producto of this.productosSeleccionados){
+    this.subtotalProductos += this.calcularSubtotal(producto);
+  }
+ }
+
+
+ // Función para calcular el subtotal
+ calcularSubtotalTotal(): number {
+  let subtotal = 0;
+
+  // Recorre la lista de productos seleccionados y suma los subtotales de cada uno
+  for (const producto of this.productosSeleccionados) {
+    subtotal +=  parseFloat(producto.precioVenta) * this.cantidadProductos[producto.id];
+  }
+
+  return subtotal;
+}
+
+// Función para calcular el IVA (16%)
+calcularIva(): number {
+  const subtotal = this.calcularSubtotalTotal();
+  return subtotal * 0.16; // 16% de IVA
+}
+
+// Función para calcular el total (subtotal + IVA)
+calcularTotal(): number {
+  const subtotal = this.calcularSubtotalTotal();
+  const iva = this.calcularIva();
+  return subtotal + iva;
+}
 
   
-  // seleccionarProducto(producto: Producto) {
-  //   // Verifica si el producto ya está en la lista de seleccionados
-  //   if (!this.productosSeleccionados.includes(producto)) {
-  //     this.productosSeleccionados.push(producto);
-  //   }
-  // }
   seleccionarProducto(producto: Producto) {
     // Agregar el producto a la lista de seleccionados
     this.productosSeleccionados.push(producto);
@@ -52,14 +84,7 @@ export class FacturaComponent {
     return this.productosSeleccionados.some(selectedItem => selectedItem.id === item.id);
   }
 
-  
-  // toggleProductoSelection(item: Producto): void {
-  //   if (this.isProductoSelected(item)) {
-  //     this.productosSeleccionados = this.productosSeleccionados.filter(selectedItem => selectedItem.id !== item.id);
-  //   } else {
-  //     this.productosSeleccionados.push(item);
-  //   }
-  // }
+ 
 
   toggleProductoSelection(item: Producto): void {
     if (this.isProductoSelected(item)) {
@@ -71,7 +96,22 @@ export class FacturaComponent {
     }
   }
   
+  //conventir los precios del producto a number, porque la api los envia como number
+  parseFloat(numero: string): number {
+    return parseFloat(numero);
+  }
+
+  //eliminar el producto que he agregado en la factura
+  eliminarProducto(index: number) {
+    this.productosSeleccionados.splice(index, 1); // Elimina el producto de la lista
+    // También puedes actualizar otros cálculos, como el subtotal, aquí.
+  }
+
   
+
+
+  
+
 
 
   item: Producto = {
@@ -131,12 +171,29 @@ export class FacturaComponent {
   }
 
   updateCreate(){
+    if (this.factura && this.factura.id){
+      //La factura tiene un ID, entonces es una edición (update)
+      this.facturaService.updateFactura(this.factura).subscribe(
+        resp => {
+          console.log('Cliente editado exitosamente', resp);
+          this.router.navigate(['/factura']);
+        },
+        error=> {
+          console.error('Error al editar cliente', error);
+        }
+      );
+    }else{
+      //La factura No tiene un ID, entonces es una nueva factura  (create)
+      this.facturaService.createFactura(this.factura).subscribe(
+        factura => {
+          this.router.navigate(['/factura'])
+        }
+      )
+      console.log('factura creada')
+    }
 
   }
 
-
-
+ 
 
 }
-
-
