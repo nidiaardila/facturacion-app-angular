@@ -65,7 +65,7 @@
           <th>Fecha</th>
           <th>Folio</th>
           <th>Cliente</th>
-          <th>Item</th>
+          <!-- <th>Item</th> -->
           <th>Subtotal</th>
           <th>IVA</th>
           <th>Total</th>
@@ -81,7 +81,7 @@
           <td>{{ factura.createdAt | date }}</td>
           <td>{{ factura.folio}}</td>
           <td>{{ factura.cliente?.nombre || 'Sin cliente' }}</td>
-          <td>{{ factura.item?.nombre || 'Sin productos' }}</td>
+          <!-- <td>{{ factura.item?.nombre || 'Sin productos' }}</td> -->
           <td>{{ factura.subtotal }}</td>
           <td>{{ factura.iva }}</td>
           <td>{{ factura.total }}</td>

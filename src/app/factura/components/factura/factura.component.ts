@@ -170,29 +170,65 @@ calcularTotal(): number {
     
   }
 
-  updateCreate(){
-    if (this.factura && this.factura.id){
-      //La factura tiene un ID, entonces es una edición (update)
-      this.facturaService.updateFactura(this.factura).subscribe(
-        resp => {
-          console.log('Cliente editado exitosamente', resp);
-          this.router.navigate(['/factura']);
-        },
-        error=> {
-          console.error('Error al editar cliente', error);
-        }
-      );
-    }else{
-      //La factura No tiene un ID, entonces es una nueva factura  (create)
-      this.facturaService.createFactura(this.factura).subscribe(
-        factura => {
-          this.router.navigate(['/factura'])
-        }
-      )
-      console.log('factura creada')
-    }
+  // updateCreate(){
+  //   if (this.factura && this.factura.id){
+  //     //La factura tiene un ID, entonces es una edición (update)
+  //     this.facturaService.updateFactura(this.factura).subscribe(
+  //       resp => {
+  //         console.log('Cliente editado exitosamente', resp);
+  //         this.router.navigate(['/factura']);
+  //       },
+  //       error=> {
+  //         console.error('Error al editar cliente', error);
+  //       }
+  //     );
+  //   }else{
+  //     //La factura No tiene un ID, entonces es una nueva factura  (create)
+  //     this.facturaService.createFactura(this.factura).subscribe(
+  //       factura => {
+  //         this.router.navigate(['/factura'])
+  //       }
+  //     )
+  //     console.log('factura creada')
+  //   }
 
+  // }
+
+  updateCreate() {
+    if (this.factura && this.factura.cliente) {
+      const clienteSeleccionado = this.clientes.find(c => c.id === this.factura.cliente.id);
+  
+      if (clienteSeleccionado) {
+        this.factura.cliente = clienteSeleccionado;
+  
+        if (this.factura.id) {
+          // La factura tiene un ID, entonces es una edición (update)
+          this.facturaService.updateFactura(this.factura).subscribe(
+            resp => {
+              console.log('Factura editada exitosamente', resp);
+              this.router.navigate(['/factura']);
+            },
+            error => {
+              console.error('Error al editar factura', error);
+            }
+          );
+        } else {
+          // La factura No tiene un ID, entonces es una nueva factura (create)
+          this.facturaService.createFactura(this.factura).subscribe(
+            factura => {
+              this.router.navigate(['/factura']);
+            }
+          );
+          console.log('Factura creada');
+        }
+      } else {
+        console.error('Error: Cliente no encontrado');
+      }
+    } else {
+      console.error('Error: Factura o cliente no válidos');
+    }
   }
+  
 
  
 

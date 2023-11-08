@@ -12,7 +12,7 @@
 
 <h3 class="cliente-titulo">  {{ ( factura.id )? 'Editar' : 'Nuevo' }}
   Cliente:
-  <small>{{ factura.id }}</small> 
+  <small>{{ factura.empresa }}</small> 
 </h3>
 
 
@@ -51,9 +51,10 @@
                   <div class="custom-select">
                     <label class="select-label">Seleccione un Cliente:</label>
                     <div class="select-wrapper">
-                      <select id="cliente" name="cliente" [(ngModel)]="factura.cliente" class="p-inputtext" required>
+                      <select id="cliente" name="cliente.id" [(ngModel)]="factura.cliente.id" class="p-inputtext" required>
                         <option value="" disabled selected>Seleccione Cliente...</option>
-                        <option *ngFor="let cliente of clientes" [value]="cliente" >{{ cliente.nombre }}</option>
+                        <!-- <option *ngFor="let cliente of clientes" [value]="factura.cliente.id" [(ngModel)]="factura.cliente.id">{{ cliente.nombre }}</option> -->
+                        <option *ngFor="let cliente of clientes" [value]="cliente.id" >{{ cliente.nombre }}</option>
                       </select>
                     </div>
                   </div>
@@ -66,8 +67,13 @@
                   <div class="custom-select">
                     <div class="select-wrapper">
                       <select id="productos" name="productos" [(ngModel)]="factura.items" class="p-inputtext" required >
+                        <!-- <select id="productos" [(ngModel)]="factura.items" class="p-inputtext" required [ngModelOptions]="{standalone: true}"> -->
+
+                        
+
                         <option value="" disabled selected>Seleccione Producto...</option>
                         <option *ngFor="let item of items" [value]="item" (click)="seleccionarProducto(item)">{{ item.nombre }}</option>
+
                       </select>
                     </div>
                   </div>
@@ -105,22 +111,26 @@
 
             <div class="total-container">
               <table class="total-table">
-                <!-- <tr>
+                <tr>
                   <td class="total-label"><label for="subtotal">Subtotal:</label></td>
                   <td class="total-value">{{ calcularSubtotalTotal() |currency:'USD':'symbol' }}</td>
+                </tr>
+                <tr>
+                  <td class="total-label"><label for="subtotal">iva 16%:</label></td>
+                  <td class="total-value">{{ calcularIva() |currency:'USD':'symbol' }}</td>
+                </tr>
+                <!-- <tr>
+                  <td class="total-label"><label for="subtotal">Subtotal:</label></td>
+                  <td><input type="text" id="iva" name="iva" [(ngModel)]="factura.iva" placeholder="iva" class="p-inputtext"  required></td>
+                </tr> -->
+                <!-- <tr>
+                  <td class="total-label"><label for="iva">iva 16 %:</label></td>
+                  <td><input type="text" id="iva" name="iva" [(ngModel)]="factura.iva" placeholder="iva" class="p-inputtext"  required (change)="calcularIva()"></td>
                 </tr> -->
                 <tr>
-                  <td class="total-label"><label for="subtotal">Subtotal:</label></td>
-                  <td class="total-value"><input type="text" id="subtotal" name="subtotal" [value]="calcularSubtotalTotal() | currency:'USD':'symbol'" class="p-inputtext" [disabled]="factura.id ? true : false" /></td>
-                </tr>
-                <tr>
-                  <td class="total-label"><label for="iva">iva 16 %:</label></td>
-                  <td><input type="text" id="iva" name="iva" [(ngModel)]="factura.iva" placeholder="iva" class="p-inputtext"  required></td>
-                </tr>
-                <tr>
                   <td class="total-label"><label for="total">Total:</label></td>
-                  <!-- <td class="total-value" [(ngModel)]="factura.total">{{ calcularTotal() | currency:'USD':'symbol' }}</td> -->
-                  <td class="total-value"><input type="text" id="total" name="btotal" [value]="calcularTotal() | currency:'USD':'symbol'" class="p-inputtext" [disabled]="factura.id ? true : false" /></td>
+                  <td class="total-value" [(ngModel)]="factura.total">{{ calcularTotal() | currency:'USD':'symbol' }}</td>
+                  <!-- <td class="total-value"><input type="text" id="total" name="btotal" [value]="calcularTotal() | currency:'USD':'symbol'" class="p-inputtext" [disabled]="factura.id ? true : false" /></td> -->
                 </tr>
                 
                 
