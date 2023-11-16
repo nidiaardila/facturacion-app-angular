@@ -66,8 +66,8 @@
                 <td>
                   <div class="custom-select">
                     <div class="select-wrapper">
-                      <select id="productos" name="productos" [(ngModel)]="factura.items" class="p-inputtext" required >
-                        <!-- <select id="productos" [(ngModel)]="factura.items" class="p-inputtext" required [ngModelOptions]="{standalone: true}"> -->
+                      <!-- <select id="productos" name="productos" [(ngModel)]="factura.items" class="p-inputtext" required > -->
+                        <select id="productos" [(ngModel)]="factura.items" class="p-inputtext" required [ngModelOptions]="{standalone: true}">
 
                         
 
@@ -75,6 +75,11 @@
                         <option *ngFor="let item of items" [value]="item" (click)="seleccionarProducto(item)">{{ item.nombre }}</option>
 
                       </select>
+                      <!-- <select id="productos" name="productos" [(ngModel)]="productoSeleccionado" class="p-inputtext" (change)="seleccionarProducto()" required >
+                        <option value="" disabled selected>Seleccione Producto...</option>
+                        <option *ngFor="let item of items" [value]="item">{{ item.nombre }}</option>
+                      </select> -->
+                      
                     </div>
                   </div>
                 </td>

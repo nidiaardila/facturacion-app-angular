@@ -37,6 +37,8 @@ export class FacturaComponent {
     return cantidad * precio;
   }
 
+  //CALCULOS DE TODA LA FACTURA
+  //calcular el subtotal de toda la factura
  actualizarSubtotalTotal(){
   for(const producto of this.productosSeleccionados){
     this.subtotalProductos += this.calcularSubtotal(producto);
@@ -70,6 +72,7 @@ calcularTotal(): number {
 }
 
   
+
   seleccionarProducto(producto: Producto) {
     // Agregar el producto a la lista de seleccionados
     this.productosSeleccionados.push(producto);
@@ -108,7 +111,28 @@ calcularTotal(): number {
   }
 
   
-
+  // seleccionarProducto(producto: Producto) {
+  //   // Verifica si hay un producto seleccionado
+  //   if (this.productoSeleccionado) {
+  //     // Agrega el producto a la lista de productos seleccionados
+  //     this.productosSeleccionados.push(this.productoSeleccionado);
+    
+  //     // Establecer la cantidad predeterminada en 1
+  //     this.cantidadProductos[this.productoSeleccionado.id] = 1;
+  
+  //     // Actualiza los cálculos antes de enviar la factura
+  //     this.actualizarSubtotalTotal();
+  //     this.factura.subtotal = this.calcularSubtotalTotal();
+  //     this.factura.iva = this.calcularIva();
+  //     this.factura.total = this.calcularTotal();
+  
+  //     // Restablece el producto seleccionado a null para futuras selecciones
+  //     this.productoSeleccionado = null;
+  //   } else {
+  //     console.error('Error: No se ha seleccionado ningún producto');
+  //   }
+  // }
+  
 
   
 
@@ -199,6 +223,13 @@ calcularTotal(): number {
       const clienteSeleccionado = this.clientes.find(c => c.id === this.factura.cliente.id);
   
       if (clienteSeleccionado) {
+
+        // Actualizar los cálculos antes de enviar la factura
+      this.actualizarSubtotalTotal();
+      this.factura.subtotal = this.calcularSubtotalTotal();
+      this.factura.iva = this.calcularIva();
+      this.factura.total = this.calcularTotal();
+
         this.factura.cliente = clienteSeleccionado;
   
         if (this.factura.id) {
