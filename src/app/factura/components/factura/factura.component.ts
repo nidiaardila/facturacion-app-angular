@@ -180,9 +180,23 @@ calcularTotal(): number {
   }
 
   ngOnInit(): void {
+    // this.activateRoute.params.pipe(
+    //   switchMap(({ id }) => this.facturaService.getFacturaId(id) )
+    // ).subscribe ( factura => this.factura = factura);
+
     this.activateRoute.params.pipe(
-      switchMap(({ id }) => this.facturaService.getFacturaId(id) )
-    ).subscribe ( factura => this.factura = factura);
+      switchMap(({ id }) => this.facturaService.getFacturaId(id))
+    ).subscribe(factura => {
+      this.factura = factura;
+
+      // Recuperar productos relacionados con la factura
+      if (this.factura && this.factura.items) {
+        this.productosSeleccionados = this.factura.items;
+        this.productosSeleccionados.forEach(producto => {
+          this.cantidadProductos[producto.id] = 1;
+        });
+      }
+    });
 
     this.clienteService.getClientes().subscribe(clientes => {
       this.clientes = clientes; // Guarda la lista de clientes en una propiedad
@@ -231,6 +245,20 @@ calcularTotal(): number {
       this.factura.total = this.calcularTotal();
 
         this.factura.cliente = clienteSeleccionado;
+
+          // Convertir productosSeleccionados a un array de productos
+        // Convertir productosSeleccionados a un array de productos
+this.factura.items = this.productosSeleccionados.map(producto => ({
+  id: producto.id,
+  nombre: producto.nombre,
+  createdAt: producto.createdAt,
+  avatar: producto.avatar,
+  descripcion: producto.descripcion,
+  precioCompra: producto.precioCompra,
+  precioVenta: producto.precioVenta,
+}));
+
+
   
         if (this.factura.id) {
           // La factura tiene un ID, entonces es una edición (update)

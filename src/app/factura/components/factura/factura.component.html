@@ -67,7 +67,7 @@
                   <div class="custom-select">
                     <div class="select-wrapper">
                       <!-- <select id="productos" name="productos" [(ngModel)]="factura.items" class="p-inputtext" required > -->
-                        <select id="productos" [(ngModel)]="factura.items" class="p-inputtext" required [ngModelOptions]="{standalone: true}">
+                        <select id="productos" name="productos" [(ngModel)]="factura.items" class="p-inputtext" required [ngModelOptions]="{standalone: true}">
 
                         
 
@@ -100,6 +100,10 @@
                 <tr *ngFor="let producto of productosSeleccionados;  let i = index">
                   <td>
                     <input type="number" name="item" [(ngModel)]="cantidadProductos[producto.id]" [ngModelOptions]="{standalone: true}" min="1" style="width: 50px;">
+                    <!-- <input type="number" name="cantidadProductos" [(ngModel)]="cantidadProductos[producto.id]" [ngModelOptions]="{standalone: true}" min="1" style="width: 50px;"> -->
+                    <!-- <input type="number" name="{{ producto.id }}" [(ngModel)]="cantidadProductos[producto.id]" [ngModelOptions]="{standalone: true}" min="1" style="width: 50px;"> -->
+                    <!-- <input type="number" [(ngModel)]="cantidadProductos[producto.id]" [ngModelOptions]="{standalone: true}" min="1" style="width: 50px;"> -->
+
                   </td>
                   <td>{{ producto.nombre }}</td>
                   <td>{{ producto.precioVenta }}</td>
@@ -132,12 +136,21 @@
                   <td class="total-label"><label for="iva">iva 16 %:</label></td>
                   <td><input type="text" id="iva" name="iva" [(ngModel)]="factura.iva" placeholder="iva" class="p-inputtext"  required (change)="calcularIva()"></td>
                 </tr> -->
-                <tr>
+                <!-- <tr>
                   <td class="total-label"><label for="total">Total:</label></td>
                   <td class="total-value" [(ngModel)]="factura.total">{{ calcularTotal() | currency:'USD':'symbol' }}</td>
-                  <!-- <td class="total-value"><input type="text" id="total" name="btotal" [value]="calcularTotal() | currency:'USD':'symbol'" class="p-inputtext" [disabled]="factura.id ? true : false" /></td> -->
-                </tr>
-                
+                  <td class="total-value"><input type="text" id="total" name="btotal" [value]="calcularTotal() | currency:'USD':'symbol'" class="p-inputtext" [disabled]="factura.id ? true : false" /></td>
+                </tr> -->
+                <!-- <tr>
+                  <td class="total-label"><label for="total">Total:</label></td>
+                  <td class="total-value">
+                      <input type="text" id="total" name="btotal" [value]="calcularTotal() | currency:'USD':'symbol'" class="p-inputtext" [disabled]="factura.id ? true : false" />
+                  </td>
+              </tr> -->
+             <tr>
+                <td class="total-label"><label for="total">Total:</label></td>
+                <td class="total-value">{{calcularTotal() | currency:'USD':'symbol'}}</td>
+            </tr>
                 
               </table>
             </div>
