@@ -14,17 +14,3 @@ export interface Factura {
     id:        string;
 }
 
-
-
-
-
-// Converts JSON strings to/from your types
-// export class Convert {
-//     public static toFactura(json: string): Factura[] {
-//         return JSON.parse(json);
-//     }
-
-//     public static facturaToJson(value: Factura[]): string {
-//         return JSON.stringify(value);
-//     }
-// }

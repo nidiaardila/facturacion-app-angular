@@ -24,7 +24,7 @@
           
               <tr>
                 <td><label for="id">ID:</label></td>
-                <td><input type="text" id="id" name="id" [(ngModel)]="factura.id" placeholder="ID" class="p-inputtext" required  disabled></td>
+                <td><input type="text" id="id" name="id" [(ngModel)]="factura.id" placeholder="ID" class="p-inputtext" required disabled=""></td>
               </tr>
               <tr>
                 <td><label for="rut">Rut:</label></td>
@@ -59,6 +59,8 @@
                     </div>
                   </div>
                 </td>
+                
+                
               </tr>
 
               <tr>
@@ -67,23 +69,21 @@
                   <div class="custom-select">
                     <div class="select-wrapper">
                       <!-- <select id="productos" name="productos" [(ngModel)]="factura.items" class="p-inputtext" required > -->
-                        <select id="productos" name="productos" [(ngModel)]="factura.items" class="p-inputtext" required [ngModelOptions]="{standalone: true}">
+                        <!-- <select id="productos" name="productos" [(ngModel)]="factura.items" class="p-inputtext" required [ngModelOptions]="{standalone: true}"> -->
+                          <select id="productos" name="productos" [(ngModel)]="productoSeleccionado" class="p-inputtext" required>
 
-                        
-
-                        <option value="" disabled selected>Seleccione Producto...</option>
+                          <option value="" disabled selected>Seleccione Producto...</option>
                         <option *ngFor="let item of items" [value]="item" (click)="seleccionarProducto(item)">{{ item.nombre }}</option>
-
                       </select>
-                      <!-- <select id="productos" name="productos" [(ngModel)]="productoSeleccionado" class="p-inputtext" (change)="seleccionarProducto()" required >
-                        <option value="" disabled selected>Seleccione Producto...</option>
-                        <option *ngFor="let item of items" [value]="item">{{ item.nombre }}</option>
-                      </select> -->
+                     
                       
                     </div>
                   </div>
                 </td>
               </tr>
+
+
+
             </table>
             
               
@@ -95,19 +95,16 @@
                   <th class="table-header">Cantidad</th>
                   <th class="table-header">Nombre</th>
                   <th class="table-header">Precio</th>
-                  <th class="table-header">Subtotal</th>
+                  <!-- <th class="table-header">Subtotal</th> -->
                 </tr>
                 <tr *ngFor="let producto of productosSeleccionados;  let i = index">
                   <td>
-                    <input type="number" name="item" [(ngModel)]="cantidadProductos[producto.id]" [ngModelOptions]="{standalone: true}" min="1" style="width: 50px;">
-                    <!-- <input type="number" name="cantidadProductos" [(ngModel)]="cantidadProductos[producto.id]" [ngModelOptions]="{standalone: true}" min="1" style="width: 50px;"> -->
-                    <!-- <input type="number" name="{{ producto.id }}" [(ngModel)]="cantidadProductos[producto.id]" [ngModelOptions]="{standalone: true}" min="1" style="width: 50px;"> -->
-                    <!-- <input type="number" [(ngModel)]="cantidadProductos[producto.id]" [ngModelOptions]="{standalone: true}" min="1" style="width: 50px;"> -->
-
+                    1
+                    <!-- <input type="number" name="item" [(ngModel)]="cantidadProductos[producto.id]" [ngModelOptions]="{standalone: true}" min="1" style="width: 50px;"> -->
                   </td>
                   <td>{{ producto.nombre }}</td>
                   <td>{{ producto.precioVenta }}</td>
-                  <td>{{  parseFloat(producto.precioVenta) * cantidadProductos[producto.id]}}</td>               
+                  <!-- <td>{{  parseFloat(producto.precioVenta) * cantidadProductos[producto.id]}}</td>                -->
                   <td>
                     <button (click)="eliminarProducto(i)" pButton class="p-button-rounded p-button-text p-button-danger" icon="pi pi-times" ></button>
                   </td>
@@ -128,29 +125,10 @@
                   <td class="total-label"><label for="subtotal">iva 16%:</label></td>
                   <td class="total-value">{{ calcularIva() |currency:'USD':'symbol' }}</td>
                 </tr>
-                <!-- <tr>
-                  <td class="total-label"><label for="subtotal">Subtotal:</label></td>
-                  <td><input type="text" id="iva" name="iva" [(ngModel)]="factura.iva" placeholder="iva" class="p-inputtext"  required></td>
-                </tr> -->
-                <!-- <tr>
-                  <td class="total-label"><label for="iva">iva 16 %:</label></td>
-                  <td><input type="text" id="iva" name="iva" [(ngModel)]="factura.iva" placeholder="iva" class="p-inputtext"  required (change)="calcularIva()"></td>
-                </tr> -->
-                <!-- <tr>
-                  <td class="total-label"><label for="total">Total:</label></td>
-                  <td class="total-value" [(ngModel)]="factura.total">{{ calcularTotal() | currency:'USD':'symbol' }}</td>
-                  <td class="total-value"><input type="text" id="total" name="btotal" [value]="calcularTotal() | currency:'USD':'symbol'" class="p-inputtext" [disabled]="factura.id ? true : false" /></td>
-                </tr> -->
-                <!-- <tr>
-                  <td class="total-label"><label for="total">Total:</label></td>
-                  <td class="total-value">
-                      <input type="text" id="total" name="btotal" [value]="calcularTotal() | currency:'USD':'symbol'" class="p-inputtext" [disabled]="factura.id ? true : false" />
-                  </td>
-              </tr> -->
-             <tr>
-                <td class="total-label"><label for="total">Total:</label></td>
-                <td class="total-value">{{calcularTotal() | currency:'USD':'symbol'}}</td>
-            </tr>
+               <tr>
+                 <td class="total-label"><label for="total">Total:</label></td>
+                  <td class="total-value">{{calcularTotal() | currency:'USD':'symbol'}}</td>
+               </tr>
                 
               </table>
             </div>

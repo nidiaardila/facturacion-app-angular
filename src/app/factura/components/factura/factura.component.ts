@@ -9,8 +9,6 @@ import { Producto } from 'src/app/producto/interfaces/producto.interface';
 import { ProductoService } from 'src/app/producto/services/producto.service';
 
 
-
-
 @Component({
   selector: 'app-factura',
   templateUrl: './factura.component.html',
@@ -31,20 +29,22 @@ export class FacturaComponent {
 
   subtotalProductos: number = 0;
 
+  
+
+
+
   calcularSubtotal(producto: Producto): number {
     const cantidad = this.cantidadProductos[producto.id];
     const precio = parseFloat(producto.precioVenta);
     return cantidad * precio;
   }
 
-  //CALCULOS DE TODA LA FACTURA
-  //calcular el subtotal de toda la factura
- actualizarSubtotalTotal(){
-  for(const producto of this.productosSeleccionados){
+actualizarSubtotalTotal() {
+  this.subtotalProductos = 0;  // Inicializar el subtotal
+  for (const producto of this.productosSeleccionados) {
     this.subtotalProductos += this.calcularSubtotal(producto);
   }
- }
-
+}
 
  // Función para calcular el subtotal
  calcularSubtotalTotal(): number {
@@ -78,7 +78,12 @@ calcularTotal(): number {
     this.productosSeleccionados.push(producto);
   
     // Establecer la cantidad predeterminada en 1
+    // this.cantidadProductos[producto.id] = 1;
+
+      // Establecer la cantidad predeterminada en 1 si no existe en cantidadProductos
+  if (!this.cantidadProductos[producto.id]) {
     this.cantidadProductos[producto.id] = 1;
+  }
   }
   
 
@@ -90,50 +95,40 @@ calcularTotal(): number {
  
 
   toggleProductoSelection(item: Producto): void {
-    if (this.isProductoSelected(item)) {
-      this.productosSeleccionados = this.productosSeleccionados.filter(selectedItem => selectedItem.id !== item.id);
-      delete this.cantidadProductos[item.id]; // Elimina la cantidad del producto
-    } else {
-      this.productosSeleccionados.push(item);
-      this.cantidadProductos[item.id] = 1; // Establece la cantidad en 1 si se agrega un producto
+    // Verificar si el producto ya está seleccionado
+    const isAlreadySelected = this.productosSeleccionados.some(selectedItem => selectedItem.id === item.id);
+  
+    if (isAlreadySelected) {
+      // Si ya está seleccionado, no hacer nada o mostrar un mensaje al usuario
+      console.log('Producto ya seleccionado');
+      return;
     }
+  
+    // Agregar el producto a la lista de seleccionados
+    this.productosSeleccionados.push(item);
+    // this.cantidadProductos[item.id] = 1; // Establecer la cantidad en 1 si se agrega un producto
+
+
+     // Establecer la cantidad en 1 si se agrega un producto
+  if (!this.cantidadProductos[item.id]) {
+    this.cantidadProductos[item.id] = 1;
   }
+  }
+  
+  
   
   //conventir los precios del producto a number, porque la api los envia como number
   parseFloat(numero: string): number {
     return parseFloat(numero);
   }
 
-  //eliminar el producto que he agregado en la factura
+ 
   eliminarProducto(index: number) {
-    this.productosSeleccionados.splice(index, 1); // Elimina el producto de la lista
-    // También puedes actualizar otros cálculos, como el subtotal, aquí.
+    const productoEliminado = this.productosSeleccionados.splice(index, 1)[0]; // Elimina el producto de la lista
+  
+    // Resta el subtotal del producto eliminado del subtotal total
+    this.subtotalProductos -= this.calcularSubtotal(productoEliminado);
   }
-
-  
-  // seleccionarProducto(producto: Producto) {
-  //   // Verifica si hay un producto seleccionado
-  //   if (this.productoSeleccionado) {
-  //     // Agrega el producto a la lista de productos seleccionados
-  //     this.productosSeleccionados.push(this.productoSeleccionado);
-    
-  //     // Establecer la cantidad predeterminada en 1
-  //     this.cantidadProductos[this.productoSeleccionado.id] = 1;
-  
-  //     // Actualiza los cálculos antes de enviar la factura
-  //     this.actualizarSubtotalTotal();
-  //     this.factura.subtotal = this.calcularSubtotalTotal();
-  //     this.factura.iva = this.calcularIva();
-  //     this.factura.total = this.calcularTotal();
-  
-  //     // Restablece el producto seleccionado a null para futuras selecciones
-  //     this.productoSeleccionado = null;
-  //   } else {
-  //     console.error('Error: No se ha seleccionado ningún producto');
-  //   }
-  // }
-  
-
   
 
 
@@ -162,7 +157,7 @@ calcularTotal(): number {
     direccion: '',
     Telefono: '',
     email: '',
-    id: ''
+    id: '' 
   },
   items: [],
   subtotal: 0,
@@ -208,31 +203,12 @@ calcularTotal(): number {
     
   }
 
-  // updateCreate(){
-  //   if (this.factura && this.factura.id){
-  //     //La factura tiene un ID, entonces es una edición (update)
-  //     this.facturaService.updateFactura(this.factura).subscribe(
-  //       resp => {
-  //         console.log('Cliente editado exitosamente', resp);
-  //         this.router.navigate(['/factura']);
-  //       },
-  //       error=> {
-  //         console.error('Error al editar cliente', error);
-  //       }
-  //     );
-  //   }else{
-  //     //La factura No tiene un ID, entonces es una nueva factura  (create)
-  //     this.facturaService.createFactura(this.factura).subscribe(
-  //       factura => {
-  //         this.router.navigate(['/factura'])
-  //       }
-  //     )
-  //     console.log('factura creada')
-  //   }
 
-  // }
 
   updateCreate() {
+
+    console.log(this.factura.id)
+
     if (this.factura && this.factura.cliente) {
       const clienteSeleccionado = this.clientes.find(c => c.id === this.factura.cliente.id);
   
@@ -246,22 +222,24 @@ calcularTotal(): number {
 
         this.factura.cliente = clienteSeleccionado;
 
-          // Convertir productosSeleccionados a un array de productos
-        // Convertir productosSeleccionados a un array de productos
-this.factura.items = this.productosSeleccionados.map(producto => ({
-  id: producto.id,
-  nombre: producto.nombre,
-  createdAt: producto.createdAt,
-  avatar: producto.avatar,
-  descripcion: producto.descripcion,
-  precioCompra: producto.precioCompra,
-  precioVenta: producto.precioVenta,
-}));
+    // Convertir productosSeleccionados a un array de productos
+       this.factura.items = this.productosSeleccionados.map(producto => ({
+          id: producto.id,
+          nombre: producto.nombre,
+          createdAt: producto.createdAt,
+          avatar: producto.avatar,
+          descripcion: producto.descripcion,
+          precioCompra: producto.precioCompra,
+          precioVenta: producto.precioVenta,
+        }));
 
-
-  
-        if (this.factura.id) {
+        if (this.factura.id && this.factura.id) {
+          
+          console.log(this.factura);
+          console.log('factura arriba es la anterior')
+          
           // La factura tiene un ID, entonces es una edición (update)
+          this.router.navigate(['/factura']);
           this.facturaService.updateFactura(this.factura).subscribe(
             resp => {
               console.log('Factura editada exitosamente', resp);
@@ -269,7 +247,10 @@ this.factura.items = this.productosSeleccionados.map(producto => ({
             },
             error => {
               console.error('Error al editar factura', error);
+              // Imprime el cuerpo de la respuesta para obtener más detalles
+              console.log('Detalles del error:', error);
             }
+            
           );
         } else {
           // La factura No tiene un ID, entonces es una nueva factura (create)
@@ -288,7 +269,4 @@ this.factura.items = this.productosSeleccionados.map(producto => ({
     }
   }
   
-
- 
-
 }
